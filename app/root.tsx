@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -29,13 +30,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Shivam</title>
-        <link rel="icon" href="/image1.png" />
+        <link rel="icon" href="/favicon.png" />
         <Meta />
         <Links />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('vite-ui-theme') || '  ';
+                  var root = document.documentElement;
+                  
+                  root.classList.remove('light', 'dark');
+                  
+                  if (theme === 'system') {
+                    var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    root.classList.add(systemTheme);
+                  } else {
+                    root.classList.add(theme);
+                  }
+                } catch (e) {
+                  // Fallback to dark theme if there's an error
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body>
-        {children}
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            {children}
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
