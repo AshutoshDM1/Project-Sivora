@@ -51,7 +51,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full">
+    <nav className="w-full sticky top-0 z-50 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -65,11 +65,11 @@ export default function Navbar() {
           
           <div 
             ref={navContainerRef}
-            className="flex items-center rounded-full p-1 border border-zinc-700 relative"
+            className="flex items-center rounded-full p-1 border border-zinc-700 relative backdrop-blur-sm"
             onMouseLeave={handleMouseLeave}
           >
             <motion.div 
-              className="bg-foreground/10 rounded-full absolute top-1 h-[calc(100%-8px)]"
+              className="bg-foreground/20 rounded-full absolute top-1 h-[calc(100%-8px)]"
               animate={{
                 width: backgroundStyle.width,
                 left: backgroundStyle.left,
