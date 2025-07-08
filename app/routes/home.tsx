@@ -20,11 +20,11 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center min-h-screen bg-gray-100 dark:bg-[#090909]">
         <div className="max-w-5xl mx-auto">
-        <Navbar />
-        <HeroSection />
-        <Experience />
-        <Techstack />
-        <Connect />
+          <Navbar />
+          <HeroSection />
+          <Experience />
+          <Techstack />
+          <Connect />
         </div>
       </div>
     </>

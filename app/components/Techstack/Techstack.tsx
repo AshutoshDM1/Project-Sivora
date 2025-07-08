@@ -1,9 +1,8 @@
 import { TECHSTACK_ICONS, TECH_STACK_DATA } from './techstack-icons';
 
-type TechItem = typeof TECH_STACK_DATA[number];
+type TechItem = (typeof TECH_STACK_DATA)[number];
 
 const Techstack = () => {
-
   const TechCard = ({ tech }: { tech: TechItem }) => (
     <div className="group relative bg-transparent rounded-xl p-5 shadow-lg border border-gray-200 dark:border-gray-700">
       <div className="flex flex-col items-center">

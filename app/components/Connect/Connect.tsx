@@ -1,15 +1,15 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "~/components/ui/button"
-import { Textarea } from "~/components/ui/textarea"
-import { Input } from "~/components/ui/input"
-import { Card, CardContent } from "~/components/ui/card"
-import { Mail, Phone, MessageCircle, ArrowRight, Linkedin, Github } from "lucide-react"
+import { useState } from 'react';
+import { Button } from '~/components/ui/button';
+import { Textarea } from '~/components/ui/textarea';
+import { Input } from '~/components/ui/input';
+import { Card, CardContent } from '~/components/ui/card';
+import { Mail, Phone, MessageCircle, ArrowRight, Linkedin, Github } from 'lucide-react';
 
 export default function Component() {
-  const [email, setEmail] = useState("")
-  const [message, setMessage] = useState("")
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   return (
     <div className="min-h-screen p-6 flex items-center justify-center">
@@ -20,7 +20,8 @@ export default function Component() {
             <div>
               <h2 className="text-3xl font-bold mb-4">Let's talk</h2>
               <p className="text-sm leading-relaxed">
-                I'm excited to apply my skills to your projects. Contact me to learn more about how I can contribute.
+                I'm excited to apply my skills to your projects. Contact me to learn more about how
+                I can contribute.
               </p>
             </div>
 
@@ -74,13 +75,22 @@ export default function Component() {
             <CardContent className="p-0">
               <h3 className="text-xl mb-6">You can also hit me up in any of this places 🍎</h3>
               <div className="flex gap-4">
-                <Button size="icon" className="bg-cyan-400 hover:bg-cyan-500 rounded-full w-12 h-12">
+                <Button
+                  size="icon"
+                  className="bg-cyan-400 hover:bg-cyan-500 rounded-full w-12 h-12"
+                >
                   <Mail className="w-5 h-5 text-white" />
                 </Button>
-                <Button size="icon" className="bg-purple-500 hover:bg-purple-600 rounded-full w-12 h-12">
+                <Button
+                  size="icon"
+                  className="bg-purple-500 hover:bg-purple-600 rounded-full w-12 h-12"
+                >
                   <Phone className="w-5 h-5 text-white" />
                 </Button>
-                <Button size="icon" className="bg-green-500 hover:bg-green-600 rounded-full w-12 h-12">
+                <Button
+                  size="icon"
+                  className="bg-green-500 hover:bg-green-600 rounded-full w-12 h-12"
+                >
                   <MessageCircle className="w-5 h-5 text-white" />
                 </Button>
               </div>
@@ -101,7 +111,11 @@ export default function Component() {
                   </Button>
                 </div>
                 <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0">
-                  <img src="https://images.unsplash.com/photo-1648218943004-5ec604ef627a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGElMjBwZXJzb24lMjBtYW58ZW58MHx8MHx8fDA%3D" alt="Profile" className="w-full h-full object-cover" />
+                  <img
+                    src="https://images.unsplash.com/photo-1648218943004-5ec604ef627a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGElMjBwZXJzb24lMjBtYW58ZW58MHx8MHx8fDA%3D"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -109,5 +123,5 @@ export default function Component() {
         </div>
       </div>
     </div>
-  )
+  );
 }

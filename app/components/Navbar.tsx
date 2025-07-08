@@ -13,39 +13,42 @@ export default function Navbar() {
   const [backgroundStyle, setBackgroundStyle] = useState({
     width: 0,
     left: 0,
-    opacity: 0
+    opacity: 0,
   });
-  
+
   const navContainerRef = useRef<HTMLDivElement>(null);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLDivElement>, linkName: string) => {
-    const target = event.currentTarget;
-    const container = navContainerRef.current;
-    
-    if (target && container) {
-      const targetRect = target.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
-      
-      const left = targetRect.left - containerRect.left;
-      const width = targetRect.width;
-      
-      setBackgroundStyle({
-        width,
-        left,
-        opacity: 1
-      });
-      setHoveredLink(linkName);
-    }
-  }, []);
+  const handleMouseEnter = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>, linkName: string) => {
+      const target = event.currentTarget;
+      const container = navContainerRef.current;
+
+      if (target && container) {
+        const targetRect = target.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        const left = targetRect.left - containerRect.left;
+        const width = targetRect.width;
+
+        setBackgroundStyle({
+          width,
+          left,
+          opacity: 1,
+        });
+        setHoveredLink(linkName);
+      }
+    },
+    []
+  );
 
   const handleMouseLeave = useCallback(() => {
-    setBackgroundStyle(prev => ({
+    setBackgroundStyle((prev) => ({
       ...prev,
-      opacity: 0
+      opacity: 0,
     }));
     setHoveredLink(null);
   }, []);
@@ -62,18 +65,18 @@ export default function Navbar() {
               </div>
             </Link>
           </div>
-          
-          <div 
+
+          <div
             ref={navContainerRef}
             className="flex items-center rounded-full p-1 border border-zinc-700 relative backdrop-blur-sm"
             onMouseLeave={handleMouseLeave}
           >
-            <motion.div 
+            <motion.div
               className="bg-foreground/20 rounded-full absolute top-1 h-[calc(100%-8px)]"
               animate={{
                 width: backgroundStyle.width,
                 left: backgroundStyle.left,
-                opacity: backgroundStyle.opacity
+                opacity: backgroundStyle.opacity,
               }}
               transition={{
                 duration: 0.25,
@@ -82,25 +85,25 @@ export default function Navbar() {
             />
 
             <div className="flex items-center rounded-full relative z-10">
-              <div 
+              <div
                 className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
                 onMouseEnter={(e) => handleMouseEnter(e, 'home')}
               >
                 <Link to="/">Home</Link>
               </div>
-              <div 
+              <div
                 className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
                 onMouseEnter={(e) => handleMouseEnter(e, 'projects')}
               >
                 <Link to="/">Projects</Link>
               </div>
-              <div 
+              <div
                 className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
                 onMouseEnter={(e) => handleMouseEnter(e, 'experience')}
               >
                 <Link to="/">Experience</Link>
               </div>
-              <div 
+              <div
                 className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
                 onMouseEnter={(e) => handleMouseEnter(e, 'contact')}
               >
