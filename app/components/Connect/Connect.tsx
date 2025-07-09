@@ -6,16 +6,17 @@ import { Textarea } from '~/components/ui/textarea';
 import { Input } from '~/components/ui/input';
 import { Card, CardContent } from '~/components/ui/card';
 import { Mail, Phone, MessageCircle, ArrowRight, Linkedin, Github } from 'lucide-react';
+import { InteractiveHoverButton } from '../magicui/interactive-hover-button';
 
 export default function Component() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center">
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="p-8 flex items-center justify-center mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Card - Let's talk */}
-        <Card className="p-8 shadow-lg border-0 rounded-3xl">
+        <Card className="p-8  border-0 rounded-3xl">
           <CardContent className="p-0 space-y-6">
             <div>
               <h2 className="text-3xl font-bold mb-4">Let's talk</h2>
@@ -36,7 +37,7 @@ export default function Component() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="border-0 rounded-lg h-12 font-mono text-sm"
+                  className="border-0 rounded-lg h-12 font-mono text-sm bg-zinc-100 dark:bg-zinc-800"
                   placeholder=""
                 />
               </div>
@@ -50,19 +51,16 @@ export default function Component() {
                 <Textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="border-0 rounded-lg min-h-[120px] font-mono text-sm resize-none"
+                  className="border-0 rounded-lg min-h-[120px] font-mono text-sm resize-none bg-zinc-100 dark:bg-zinc-800"
                   placeholder=""
                 />
               </div>
 
               {/* Send Button */}
               <div className="flex justify-end pt-4">
-                <Button className="rounded-full px-6 py-2 flex items-center gap-2">
-                  send message
-                  <div className="rounded-full p-1">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </Button>
+                <InteractiveHoverButton className="rounded-full px-6 py-2 flex items-center gap-2 text-light bg-foreground/5">
+                  Send Message
+                </InteractiveHoverButton>
               </div>
             </div>
           </CardContent>
@@ -71,55 +69,55 @@ export default function Component() {
         {/* Right Side */}
         <div className="space-y-8">
           {/* Contact Methods Card */}
-          <Card className="p-8 shadow-lg border-0 rounded-3xl">
+          <Card className="p-8 border-0 rounded-3xl">
             <CardContent className="p-0">
-              <h3 className="text-xl mb-6">You can also hit me up in any of this places 🍎</h3>
+              <h3 className="text-3xl mb-6">You can also hit me up in any of this places 🍎</h3>
               <div className="flex gap-4">
                 <Button
                   size="icon"
-                  className="bg-cyan-400 hover:bg-cyan-500 rounded-full w-12 h-12"
+                  className="bg-cyan-400 hover:bg-cyan-500 rounded-full w-20 h-12 cursor-pointer"
                 >
-                  <Mail className="w-5 h-5 text-white" />
+                  <Mail className="w-8 h-8 text-white" />
                 </Button>
                 <Button
                   size="icon"
-                  className="bg-purple-500 hover:bg-purple-600 rounded-full w-12 h-12"
+                  className="bg-purple-500 hover:bg-purple-600 rounded-full w-20 h-12 cursor-pointer"
                 >
-                  <Phone className="w-5 h-5 text-white" />
+                  <Phone className="w-8 h-8 text-white" />
                 </Button>
                 <Button
                   size="icon"
-                  className="bg-green-500 hover:bg-green-600 rounded-full w-12 h-12"
+                  className="bg-green-500 hover:bg-green-600 rounded-full w-20 h-12 cursor-pointer"
                 >
-                  <MessageCircle className="w-5 h-5 text-white" />
+                  <MessageCircle className="w-8 h-8 text-white" />
                 </Button>
               </div>
             </CardContent>
           </Card>
 
           {/* Social Links Card */}
-          <Card className="p-8 shadow-lg border-0 rounded-3xl">
-            <CardContent className="p-0">
-              <h3 className="text-xl mb-6">Find me at:</h3>
-              <div className="flex items-center gap-4">
-                <div className="flex gap-4 flex-1">
-                  <Button className="rounded-2xl px-8 py-6 h-auto flex items-center justify-center flex-1">
-                    <Linkedin className="w-8 h-8" />
-                  </Button>
-                  <Button className="rounded-2xl px-8 py-6 h-auto flex items-center justify-center flex-1">
-                    <Github className="w-8 h-8" />
-                  </Button>
+          <div className="flex gap-4">
+            <Card className="p-8 w-full border-0 rounded-3xl">
+              <CardContent className="p-0">
+                <h3 className="text-3xl mb-3">Find me at:</h3>
+                <div className="flex gap-4">
+                  <button className="rounded-2xl cursor-pointer py-6 w-1/2 flex items-center justify-center bg-blue-600 hover:bg-blue-700">
+                    <Linkedin className="w-14 h-14 text-white" />
+                  </button>
+                  <button className="rounded-2xl cursor-pointer py-6 w-1/2 flex items-center justify-center bg-zinc-800 hover:bg-zinc-900">
+                    <Github className="w-14 h-14 text-white" />
+                  </button>
                 </div>
-                <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1648218943004-5ec604ef627a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGElMjBwZXJzb24lMjBtYW58ZW58MHx8MHx8fDA%3D"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+            <div className="w-36 h-full border-4 border-blue-500 rounded-4xl overflow-hidden flex-shrink-0">
+              <img
+                src="https://images.unsplash.com/photo-1648218943004-5ec604ef627a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGElMjBwZXJzb24lMjBtYW58ZW58MHx8MHx8fDA%3D"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

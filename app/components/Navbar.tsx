@@ -54,90 +54,77 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="w-full sticky top-0 z-50 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center">
-              <div className="text-white dark:text-black bg-black dark:bg-white rounded-full flex items-center justify-center px-7 hidden">
-                <span className="font-bold text-lg py-1">S</span>
-              </div>
-            </Link>
-          </div>
+    <>
+      <div className="flex items-center space-x-4 fixed right-4 top-2 z-[100]">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={toggleTheme}
+          className="hover:bg-foreground/20 bg-foreground/10 cursor-pointer backdrop-blur-sm"
+        >
+          {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </Button>
+      </div>
+      <nav className="w-full sticky top-0 z-50 hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <Link to="/" className="flex items-center">
+                <div className="text-white dark:text-black bg-black dark:bg-white rounded-full flex items-center justify-center px-7 hidden">
+                  <span className="font-bold text-lg py-1">S</span>
+                </div>
+              </Link>
+            </div>
 
-          <div
-            ref={navContainerRef}
-            className="flex items-center rounded-full p-1 border border-zinc-700 relative backdrop-blur-sm"
-            onMouseLeave={handleMouseLeave}
-          >
-            <motion.div
-              className="bg-foreground/20 rounded-full absolute top-1 h-[calc(100%-8px)]"
-              animate={{
-                width: backgroundStyle.width,
-                left: backgroundStyle.left,
-                opacity: backgroundStyle.opacity,
-              }}
-              transition={{
-                duration: 0.25,
-                ease: 'easeInOut',
-              }}
-            />
+            <div
+              ref={navContainerRef}
+              className="flex items-center rounded-full p-1 border border-zinc-700 relative backdrop-blur-sm"
+              onMouseLeave={handleMouseLeave}
+            >
+              <motion.div
+                className="bg-foreground/20 rounded-full absolute top-1 h-[calc(100%-8px)]"
+                animate={{
+                  width: backgroundStyle.width,
+                  left: backgroundStyle.left,
+                  opacity: backgroundStyle.opacity,
+                }}
+                transition={{
+                  duration: 0.25,
+                  ease: 'easeInOut',
+                }}
+              />
 
-            <div className="flex items-center rounded-full relative z-10">
-              <div
-                className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
-                onMouseEnter={(e) => handleMouseEnter(e, 'home')}
-              >
-                <Link to="/">Home</Link>
-              </div>
-              <div
-                className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
-                onMouseEnter={(e) => handleMouseEnter(e, 'projects')}
-              >
-                <Link to="/">Projects</Link>
-              </div>
-              <div
-                className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
-                onMouseEnter={(e) => handleMouseEnter(e, 'experience')}
-              >
-                <Link to="/">Experience</Link>
-              </div>
-              <div
-                className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
-                onMouseEnter={(e) => handleMouseEnter(e, 'contact')}
-              >
-                <Link to="/">Contact</Link>
+              <div className="flex items-center rounded-full relative z-10">
+                <div
+                  className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
+                  onMouseEnter={(e) => handleMouseEnter(e, 'home')}
+                >
+                  <Link to="/">Home</Link>
+                </div>
+                <div
+                  className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
+                  onMouseEnter={(e) => handleMouseEnter(e, 'projects')}
+                >
+                  <Link to="/">Projects</Link>
+                </div>
+                <div
+                  className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
+                  onMouseEnter={(e) => handleMouseEnter(e, 'experience')}
+                >
+                  <Link to="/">Experience</Link>
+                </div>
+                <div
+                  className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
+                  onMouseEnter={(e) => handleMouseEnter(e, 'contact')}
+                >
+                  <Link to="/">Contact</Link>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleTheme}
-              className="hover:bg-foreground/20 bg-foreground/10 cursor-pointer"
-            >
-              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="hidden">
-            <Button variant="ghost" size="sm" className="hover:bg-zinc-800">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </Button>
-          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }

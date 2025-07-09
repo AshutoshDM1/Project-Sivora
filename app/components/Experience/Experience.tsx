@@ -1,4 +1,5 @@
 import React from 'react';
+import { TECH_STACK_DATA, TECHSTACK_ICONS } from '../Techstack/techstack-icons';
 
 interface TechStackItem {
   name: string;
@@ -16,37 +17,6 @@ interface ExperienceItem {
 
 const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
-    {
-      title: 'Front-end Developer',
-      company: 'CONSISTE CONSULTORIA E SISTEMAS LTDA',
-      period: 'Jun 2022 - Jan 2025',
-      techStack: [
-        { name: 'Angular', color: 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' },
-        {
-          name: 'TypeScript',
-          color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
-        },
-        { name: 'SCSS', color: 'bg-pink-100 text-pink-800 dark:bg-pink-900/20 dark:text-pink-400' },
-        {
-          name: 'Git',
-          color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400',
-        },
-        {
-          name: 'Figma',
-          color: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
-        },
-      ],
-      responsibilities: [
-        'Develop and maintain 5+ Angular web applications, ensuring high performance, responsiveness and good user experience through regular usability testing and feedback incorporation.',
-        'Conceptualize and implement reusable Angular libraries to streamline development and centralize maintenance.',
-        'Explore and integrate new technologies and methodologies to enhance user experience.',
-      ],
-      keyResults: [
-        'Designed and developed 6 reusable Angular libraries, reducing development time by 60% and centralizing maintenance, resulting in a more efficient workflow across 10+ projects.',
-        'Developed a dynamic dashboard web application similar to Microsoft Power BI, enabling users to create custom dashboards with flexible features for presenting data integrated from public data like CADASTUR and IBGE.',
-        'Enhanced the UI/UX of an advanced table component with filtering, aggregation, and sorting functionalities, improving data access efficiency and user satisfaction.',
-      ],
-    },
     {
       title: 'Frontend Intern',
       company: 'GFT Technologies',
@@ -78,11 +48,38 @@ const Experience: React.FC = () => {
         'Shadow senior developers and contribute to small features.',
         'Practice version control with Git and collaborative workflows.',
       ],
+      keyResults: [
+        'Designed and developed 6 reusable Angular libraries, reducing development time by 60% and centralizing maintenance, resulting in a more efficient workflow across 10+ projects.',
+        'Developed a dynamic dashboard web application similar to Microsoft Power BI, enabling users to create custom dashboards with flexible features for presenting data integrated from public data like CADASTUR and IBGE.',
+        'Enhanced the UI/UX of an advanced table component with filtering, aggregation, and sorting functionalities, improving data access efficiency and user satisfaction.',
+      ],
     },
   ];
 
+  // Helper function to map technology names to icon keys
+  const mapTechToIconKey = (techName: string): keyof typeof TECHSTACK_ICONS | null => {
+    const techMap: Record<string, keyof typeof TECHSTACK_ICONS> = {
+      'HTML': 'html',
+      'CSS': 'css',
+      'JavaScript': 'javascript',
+      'React': 'react',
+      'Git': 'git',
+      'Figma': 'figma',
+      'TypeScript': 'typescript',
+      'Next.js': 'nextjs',
+      'Python': 'python',
+      'Node.js': 'nodejs',
+    };
+    return techMap[techName] || null;
+  };
+
+  const getTechColor = (tech: TechStackItem): string => {
+    const techData = TECH_STACK_DATA.find(techItem => techItem.name === tech.name);
+    return techData?.color || 'text-gray-600';
+  };
+
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <section className="py-2 px-4 sm:px-6 lg:px-8 ">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           My Experience
@@ -114,8 +111,16 @@ const Experience: React.FC = () => {
                 {experience.techStack.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium ${tech.color}`}
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-sm font-medium ${tech.color}`}
                   >
+                    <div
+                      className={`w-4 h-4 flex items-center justify-center ${getTechColor(tech)} overflow-hidden flex-shrink-0 rounded-sm`}
+                    >
+                      {(() => {
+                        const iconKey = mapTechToIconKey(tech.name);
+                        return iconKey ? TECHSTACK_ICONS[iconKey] : <span className="text-xs">?</span>;
+                      })()}
+                    </div>
                     {tech.name}
                   </span>
                 ))}
