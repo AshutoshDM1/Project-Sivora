@@ -1,5 +1,6 @@
 import React from 'react';
 import { TECH_STACK_DATA, TECHSTACK_ICONS } from '../Techstack/techstack-icons';
+import { BorderBeam } from '../magicui/border-beam';
 
 interface TechStackItem {
   name: string;
@@ -90,9 +91,10 @@ const Experience: React.FC = () => {
         {experiences.map((experience, index) => (
           <div
             key={index}
-            className="relative bg-card rounded-lg border border-border p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+            className="bg-card rounded-lg border border-border p-6 shadow-sm hover:shadow-md transition-shadow duration-200 relative"
           >
             {/* Header */}
+            <BorderBeam duration={20} size={500} />
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-1">{experience.title}</h3>
