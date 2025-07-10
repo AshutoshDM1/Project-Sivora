@@ -60,27 +60,27 @@ const Experience: React.FC = () => {
   // Helper function to map technology names to icon keys
   const mapTechToIconKey = (techName: string): keyof typeof TECHSTACK_ICONS | null => {
     const techMap: Record<string, keyof typeof TECHSTACK_ICONS> = {
-      'HTML': 'html',
-      'CSS': 'css',
-      'JavaScript': 'javascript',
-      'React': 'react',
-      'Git': 'git',
-      'Figma': 'figma',
-      'TypeScript': 'typescript',
+      HTML: 'html',
+      CSS: 'css',
+      JavaScript: 'javascript',
+      React: 'react',
+      Git: 'git',
+      Figma: 'figma',
+      TypeScript: 'typescript',
       'Next.js': 'nextjs',
-      'Python': 'python',
+      Python: 'python',
       'Node.js': 'nodejs',
     };
     return techMap[techName] || null;
   };
 
   const getTechColor = (tech: TechStackItem): string => {
-    const techData = TECH_STACK_DATA.find(techItem => techItem.name === tech.name);
+    const techData = TECH_STACK_DATA.find((techItem) => techItem.name === tech.name);
     return techData?.color || 'text-gray-600';
   };
 
   return (
-    <section className="py-2 px-4 sm:px-6 lg:px-8 ">
+    <section className="py-2 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           My Experience
@@ -120,7 +120,11 @@ const Experience: React.FC = () => {
                     >
                       {(() => {
                         const iconKey = mapTechToIconKey(tech.name);
-                        return iconKey ? TECHSTACK_ICONS[iconKey] : <span className="text-xs">?</span>;
+                        return iconKey ? (
+                          TECHSTACK_ICONS[iconKey]
+                        ) : (
+                          <span className="text-xs">?</span>
+                        );
                       })()}
                     </div>
                     {tech.name}

@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { Button } from '~/components/ui/button';
 import { Textarea } from '~/components/ui/textarea';
@@ -13,7 +12,7 @@ export default function Component() {
   const [message, setMessage] = useState('');
 
   return (
-    <div className="p-8 flex items-center justify-center mt-10">
+    <div className="p-4 flex items-center justify-center mt-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Card - Let's talk */}
         <Card className="p-8  border-0 rounded-3xl">
@@ -58,7 +57,7 @@ export default function Component() {
 
               {/* Send Button */}
               <div className="flex justify-end pt-4">
-                <InteractiveHoverButton className="rounded-full px-6 py-2 flex items-center gap-2 text-light bg-foreground/5">
+                <InteractiveHoverButton className="bg-foreground/5">
                   Send Message
                 </InteractiveHoverButton>
               </div>
@@ -72,7 +71,7 @@ export default function Component() {
           <Card className="p-8 border-0 rounded-3xl">
             <CardContent className="p-0">
               <h3 className="text-3xl mb-6">You can also hit me up in any of this places 🍎</h3>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap sm:flex-nowrap gap-4">
                 <Button
                   size="icon"
                   className="bg-cyan-400 hover:bg-cyan-500 rounded-full w-20 h-12 cursor-pointer"
@@ -96,7 +95,7 @@ export default function Component() {
           </Card>
 
           {/* Social Links Card */}
-          <div className="flex gap-4">
+          <div className="flex flex-wrap sm:flex-nowrap gap-4">
             <Card className="p-8 w-full border-0 rounded-3xl">
               <CardContent className="p-0">
                 <h3 className="text-3xl mb-3">Find me at:</h3>

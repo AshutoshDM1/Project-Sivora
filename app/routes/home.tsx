@@ -9,8 +9,7 @@ import { BlurFade } from '~/components/magicui/blur-fade';
 import ReactLenis, { useLenis } from 'lenis/react';
 
 export function meta({}: Route.MetaArgs) {
-  const lenis = useLenis((lenis) => {
-  })
+  const lenis = useLenis((lenis) => {});
   return [
     { title: 'Shivam' },
     {
@@ -22,45 +21,43 @@ export function meta({}: Route.MetaArgs) {
 
 const element = [
   {
-    heading : (
+    heading: (
       <div id="techstack">
         <Techstack />
       </div>
     ),
   },
   {
-    heading : (
+    heading: (
       <div id="experience">
         <Experience />
       </div>
     ),
   },
   {
-    heading : (
+    heading: (
       <div id="contact">
         <Connect />
       </div>
     ),
   },
-  
-]
-
+];
 
 export default function Home() {
   return (
     <>
-     <ReactLenis root />
+      <ReactLenis root />
       <div id="home" className="flex flex-col items-center bg-gray-100 dark:bg-[#090909]">
-      <Navbar />
+        <Navbar />
         <div className="max-w-[83rem] mx-auto">
-          <div >
+          <div>
             <HeroSection />
           </div>
           <div id="projects">
             <Projects />
           </div>
           {element.map((element, index) => (
-            <BlurFade inView={true} key={index} delay={.3 + index * 0.2}>
+            <BlurFade inView={true} key={index} delay={0.3 + index * 0.2}>
               {element.heading}
             </BlurFade>
           ))}

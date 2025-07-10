@@ -93,7 +93,7 @@ export default function Navbar() {
       opacity: 1,
       transition: {
         duration: 0.8,
-        ease: "easeOut" as const,
+        ease: 'easeOut' as const,
         staggerChildren: 0.1,
         delayChildren: 0.2,
       },
@@ -112,7 +112,7 @@ export default function Navbar() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut" as const,
+        ease: 'easeOut' as const,
         delay: 0.5,
       },
     },
@@ -128,7 +128,7 @@ export default function Navbar() {
       opacity: 1,
       transition: {
         duration: 0.4,
-        ease: "easeOut" as const,
+        ease: 'easeOut' as const,
       },
     },
   };
@@ -143,7 +143,7 @@ export default function Navbar() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut" as const,
+        ease: 'easeOut' as const,
         staggerChildren: 0.08,
       },
     },
@@ -151,8 +151,8 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.div 
-        className="flex items-center space-x-4 fixed right-4 top-2 z-[100]"
+      <motion.div
+        className="flex items-center space-x-4 fixed right-4 top-4 z-[100]"
         variants={themeButtonVariants}
         initial="hidden"
         animate="visible"
@@ -164,25 +164,25 @@ export default function Navbar() {
           className="hover:bg-foreground/20 bg-foreground/10 cursor-pointer backdrop-blur-sm"
         >
           <motion.div
-            animate={{ 
+            animate={{
               rotate: isTransitioning ? 360 : 0,
               scale: isTransitioning ? 1.1 : 1,
             }}
-            transition={{ 
-              duration: 0.5, 
-              ease: "easeInOut",
-              type: "spring",
+            transition={{
+              duration: 0.5,
+              ease: 'easeInOut',
+              type: 'spring',
               stiffness: 200,
-              damping: 15
+              damping: 15,
             }}
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </motion.div>
         </Button>
       </motion.div>
-      
-      <motion.nav 
-        className="w-full sticky top-0 z-50 hidden md:block"
+
+      <motion.nav
+        className="w-full sticky top-0 z-50"
         variants={navVariants}
         initial="hidden"
         animate="visible"
@@ -217,7 +217,7 @@ export default function Navbar() {
                 }}
               />
 
-              <div className="flex items-center rounded-full relative z-10 bg-foreground/5">
+              <div className="items-center rounded-full relative z-10 bg-foreground/5 hidden md:flex">
                 {links.map((link, index) => (
                   <motion.div
                     key={index}
@@ -225,12 +225,32 @@ export default function Navbar() {
                     className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
                     onMouseEnter={(e) => handleMouseEnter(e, link.name)}
                     onClick={() => scrollToSection(link.sectionId)}
-                    whileHover={{ 
-                      transition: { duration: 0.2 }
+                    whileHover={{
+                      transition: { duration: 0.2 },
                     }}
-                    whileTap={{ 
+                    whileTap={{
                       scale: 0.95,
-                      transition: { duration: 0.1 }
+                      transition: { duration: 0.1 },
+                    }}
+                  >
+                    <div>{link.name}</div>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="flex items-center rounded-full relative z-10 bg-foreground/5 md:hidden">
+                {links.slice(0, 3).map((link, index) => (
+                  <motion.div
+                    key={index}
+                    variants={linkVariants}
+                    className="cursor-pointer px-4 py-2 text-[13px] font-medium transition-colors rounded-full"
+                    onMouseEnter={(e) => handleMouseEnter(e, link.name)}
+                    onClick={() => scrollToSection(link.sectionId)}
+                    whileHover={{
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{
+                      scale: 0.95,
+                      transition: { duration: 0.1 },
                     }}
                   >
                     <div>{link.name}</div>

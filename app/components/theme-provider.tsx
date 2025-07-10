@@ -34,7 +34,7 @@ export function ThemeProvider({
     }
     return defaultTheme;
   });
-  
+
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export function ThemeProvider({
     const root = window.document.documentElement;
 
     // Add transition styles to root for smooth theme switching
-    root.style.setProperty('--theme-transition-duration', '1000ms');
+    root.style.setProperty('--theme-transition-duration', '500ms');
     root.style.setProperty('--theme-transition-timing', 'cubic-bezier(0.4, 0, 0.2, 1)');
 
     // Add CSS transitions to all elements that change with theme
@@ -64,7 +64,7 @@ export function ThemeProvider({
         transition: none !important;
       }
     `;
-    
+
     if (!document.head.querySelector('#theme-transitions')) {
       style.id = 'theme-transitions';
       document.head.appendChild(style);
@@ -92,38 +92,57 @@ export function ThemeProvider({
 
   const handleSetTheme = (newTheme: Theme) => {
     if (typeof window === 'undefined') return;
-    
+
     setIsTransitioning(true);
-    
-    // Create a flash overlay effect
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
+
+    // Apply the new theme immediately
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+
+    if (newTheme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+      root.classList.add(systemTheme);
+    } else {
+      root.classList.add(newTheme);
+    }
+
+    // Create a reveal overlay that shows the transition progressively from left to right
+    const revealOverlay = document.createElement('div');
+    revealOverlay.style.cssText = `
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: ${newTheme === 'dark' ? '#000000' : '#ffffff'};
-      opacity: 0;
+      background: ${newTheme === 'dark' ? '#090909' : '#F3F4F6'};
+      clip-path: inset(0 100% 0 0);
       pointer-events: none;
       z-index: 9999;
-      transition: opacity 200ms ease-out;
+      transition: clip-path 750ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform-origin: left center;
     `;
-    
-    document.body.appendChild(overlay);
-    
-    // Trigger the flash effect
+
+    document.body.appendChild(revealOverlay);
+
+    // Start the progressive reveal animation from left to right
     requestAnimationFrame(() => {
-      overlay.style.opacity = '0.3';
-      
-      setTimeout(() => {
-        overlay.style.opacity = '0';
-        
+      requestAnimationFrame(() => {
+        // Animate from left to right by changing the clip-path
+        revealOverlay.style.clipPath = 'inset(0 0% 0 0)';
+
         setTimeout(() => {
-          document.body.removeChild(overlay);
-          setIsTransitioning(false);
-        }, 200);
-      }, 100);
+          // After showing completely, animate out to the right
+          revealOverlay.style.clipPath = 'inset(0 0 0 100%)';
+          revealOverlay.style.transition = 'clip-path 700ms cubic-bezier(0.4, 0, 0.2, 1)';
+
+          setTimeout(() => {
+            document.body.removeChild(revealOverlay);
+            setIsTransitioning(false);
+          }, 700);
+        }, 350);
+      });
     });
 
     localStorage.setItem(storageKey, newTheme);

@@ -36,7 +36,7 @@ const Techstack = () => {
       icon: null,
     });
   };
-  
+
   const TechCard = ({ tech }: { tech: TechItem }) => (
     <div
       onMouseEnter={() => handleTextChange(tech)}
@@ -90,8 +90,8 @@ const Techstack = () => {
               {techstackText.name}
             </motion.h1>
           </div>
-          <div className='flex flex-col items-start justify-center col-span-2 p-2 bg-gradient-to-r from-indigo-500 to-pink-400 rounded-lg'>
-            <img src="/icons.png" alt="Techstack" className='w-20 h-20' />
+          <div className="flex flex-col items-start justify-center col-span-2 p-2 bg-gradient-to-r from-indigo-500 to-pink-400 rounded-lg">
+            <img src="/icons.png" alt="Techstack" className="w-20 h-20" />
           </div>
           {TECH_STACK_DATA.map((tech, index) => (
             <TechCard key={tech.name} tech={tech} />
